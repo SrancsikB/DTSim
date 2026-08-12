@@ -6,7 +6,10 @@ public class SimController : MonoBehaviour
     [SerializeField] Transform[] wayPoints;
     [SerializeField] float palGenerateTime = 4.0f;
     float timeToGeneratePal;
-
+    [SerializeField] public Transform elagazasEleje;
+    [SerializeField] public Transform elagazasVege;
+    [SerializeField] public Transform[] elagazasA;
+    [SerializeField] public Transform[] elagazasB;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
