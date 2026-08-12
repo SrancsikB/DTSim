@@ -33,8 +33,7 @@ public class RobotController : MonoBehaviour
                     spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.red : Color.green;
                     if (spriteRenderer.color==Color.green)
                     {
-                        spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.white : Color.green;
-                        
+                        spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.white : Color.green; 
                     }
                     return;
 
@@ -50,11 +49,11 @@ public class RobotController : MonoBehaviour
                 {
                     if(spriteRenderer.color==Color.white) 
                     {
-                        pal.oneOrTwo = 2;
+                        
                         Debug.Log("Nincs kiszinezve!");
                         return;
                     }
-                    if (pal.oneOrTwo==2)
+                    if (spriteRenderer.color == Color.red)
                     {
                         Debug.Log("Hibás szín találva!");
                         return;
@@ -70,10 +69,9 @@ public class RobotController : MonoBehaviour
             {
                 if (spriteRenderer != null)
                 {
-                    if (pal.oneOrTwo == 2)
+                    if (spriteRenderer.color != Color.green)
                     {
                         spriteRenderer.color = Color.green;
-                        pal.oneOrTwo = 1;
                         Debug.Log("Hiba javítva!");
                         return;
                     }

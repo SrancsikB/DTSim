@@ -6,7 +6,6 @@ public class PaletteController : MonoBehaviour
     public Transform[] wayPoints;
     int wayPointIndex = 0;
     [SerializeField] float movingSpeed=2.0f;
-    [SerializeField] public int oneOrTwo = 1;
     [SerializeField] SimController simController;
 
     private enum State
@@ -17,6 +16,7 @@ public class PaletteController : MonoBehaviour
     private State currentState = State.MovingOnPath;
     private int branchIndex = 0;
     private Transform[] activeBranch;
+    
 
     void Awake()
     {
@@ -31,7 +31,6 @@ public class PaletteController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
         transform.position = wayPoints[wayPointIndex].position;
         wayPointIndex += 1;
     }
@@ -39,6 +38,8 @@ public class PaletteController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+
         if (currentState == State.MovingOnPath)
         {
             if (wayPointIndex < wayPoints.Length)
@@ -52,7 +53,7 @@ public class PaletteController : MonoBehaviour
 
                     if (wayPointIndex == SearchIndex(wayPoints, simController.elagazasEleje))
                     {
-                        activeBranch = (oneOrTwo == 1) ? simController.elagazasA : simController.elagazasB;
+                        activeBranch = (spriteRenderer.color == Color.green) ? simController.elagazasA : simController.elagazasB;
                         branchIndex = 0;
                         currentState = State.InBranch;
                     }
