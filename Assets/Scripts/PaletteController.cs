@@ -6,7 +6,7 @@ public class PaletteController : MonoBehaviour
     public Transform[] wayPoints;
     int wayPointIndex = 0;
     [SerializeField] float movingSpeed=2.0f;
-    [SerializeField] int oneOrTwo = 1;
+    [SerializeField] public int oneOrTwo = 1;
     [SerializeField] SimController simController;
 
     private enum State

@@ -14,13 +14,24 @@ public class RobotController : MonoBehaviour
         
     }
 
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         PaletteController pal = collision.GetComponent<PaletteController>();
+        SpriteRenderer spriteRenderer = collision.GetComponent<SpriteRenderer>();
         if (pal != null)
         {
             Debug.Log("Paletta elérve");
+            if (spriteRenderer != null)
+            {
+                if (pal.oneOrTwo==2)
+                {
+                    spriteRenderer.color = Color.red;
+                }
+                
+            }
         }
+        
+        
     }
 }
