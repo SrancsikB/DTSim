@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour
@@ -29,8 +30,14 @@ public class RobotController : MonoBehaviour
                 Debug.Log("Paletta elérve");
                 if (spriteRenderer != null)
                 {
-                    spriteRenderer.color=Random.Range(1, 101)>75 ? Color.red : Color.green;
+                    spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.red : Color.green;
+                    if (spriteRenderer.color==Color.green)
+                    {
+                        spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.white : Color.green;
+                        
+                    }
                     return;
+
                 }
             }
         }
@@ -41,12 +48,18 @@ public class RobotController : MonoBehaviour
             {
                 if (spriteRenderer!=null)
                 {
-                    pal.oneOrTwo=spriteRenderer.color == Color.red ? 2 : 1;
+                    if(spriteRenderer.color==Color.white) 
+                    {
+                        pal.oneOrTwo = 2;
+                        Debug.Log("Nincs kiszinezve!");
+                        return;
+                    }
                     if (pal.oneOrTwo==2)
                     {
-                        Debug.Log("Hiba találva!");
+                        Debug.Log("Hibás szín találva!");
+                        return;
                     }
-                    return;
+                    
                 }
             }
         }
@@ -62,8 +75,9 @@ public class RobotController : MonoBehaviour
                         spriteRenderer.color = Color.green;
                         pal.oneOrTwo = 1;
                         Debug.Log("Hiba javítva!");
+                        return;
                     }
-                    return;
+                    
                 }
             }
         }
