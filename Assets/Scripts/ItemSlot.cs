@@ -1,5 +1,4 @@
 using UnityEngine;
-<<<<<<< Updated upstream
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -57,20 +56,3 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         dragObject.transform.position = eventData.position;
     }
 }
-=======
-
-public class ItemSlot : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
->>>>>>> Stashed changes

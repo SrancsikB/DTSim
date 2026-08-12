@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Toolbar : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private ItemSlot[] slots;
+    [SerializeField] private ItemData[] items;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        for (int i = 0; i < slots.Length && i < items.Length; i++)
+        {
+            slots[i].SetItem(items[i]);
+        }
     }
 }
