@@ -31,6 +31,7 @@ public class PaletteController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        oneOrTwo = Random.Range(1, 3);
         transform.position = wayPoints[wayPointIndex].position;
         wayPointIndex += 1;
     }
