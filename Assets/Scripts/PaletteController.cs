@@ -20,7 +20,7 @@ public class PaletteController : MonoBehaviour
 
     void Awake()
     {
-        simController = FindObjectOfType<SimController>();
+        simController = Object.FindFirstObjectByType<SimController>();
 
         if (simController == null)
             Debug.LogError("Nincs SimController a jelenetben!");
