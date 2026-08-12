@@ -1182,6 +1182,12 @@ MonoBehaviour:
   - {fileID: 1494774562}
   - {fileID: 1699060655}
   palGenerateTime: 4
+  elagazasEleje: {fileID: 1589467400}
+  elagazasVege: {fileID: 1494774562}
+  elagazasA:
+  - {fileID: 1596762511}
+  elagazasB:
+  - {fileID: 849172154}
 --- !u!4 &1243514729
 Transform:
   m_ObjectHideFlags: 0
