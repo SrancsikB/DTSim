@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour
@@ -17,21 +18,40 @@ public class RobotController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        RobotController robot =GetComponent<RobotController>();
         PaletteController pal = collision.GetComponent<PaletteController>();
         SpriteRenderer spriteRenderer = collision.GetComponent<SpriteRenderer>();
-        if (pal != null)
+        if (robot.gameObject.name=="Robot")
         {
-            Debug.Log("Paletta elérve");
-            if (spriteRenderer != null)
+            
+            if (pal != null)
             {
-                if (pal.oneOrTwo==2)
+                Debug.Log("Paletta elérve");
+                if (spriteRenderer != null)
                 {
-                    spriteRenderer.color = Color.red;
+                    spriteRenderer.color=Random.Range(1, 101)>75 ? Color.red : Color.green;
+                    return;
                 }
-                
             }
         }
+
+        if (robot.gameObject.name=="Tester")
+        {
+            if (pal!=null)
+            {
+                if (spriteRenderer!=null)
+                {
+                    pal.oneOrTwo=spriteRenderer.color == Color.red ? 2 : 1;
+                    if (pal.oneOrTwo==2)
+                    {
+                        Debug.Log("Hiba találva!");
+                    }
+                    return;
+                }
+            }
+        }
+
         
-        
+
     }
 }
