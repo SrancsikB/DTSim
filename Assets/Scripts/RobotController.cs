@@ -51,7 +51,23 @@ public class RobotController : MonoBehaviour
             }
         }
 
-        
+        if (robot.gameObject.name == "Fixer")
+        {
+            if (pal != null)
+            {
+                if (spriteRenderer != null)
+                {
+                    if (pal.oneOrTwo == 2)
+                    {
+                        spriteRenderer.color = Color.green;
+                        pal.oneOrTwo = 1;
+                        Debug.Log("Hiba javítva!");
+                    }
+                    return;
+                }
+            }
+        }
+
 
     }
 }
