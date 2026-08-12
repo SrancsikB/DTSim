@@ -14,17 +14,27 @@ public class PauseUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseUI.SetActive(true);
-        }     
+            if (pauseUI.activeSelf)
+            {
+                BtnResumeClick();
+            }
+            else
+            {
+                pauseUI.SetActive(true);
+                Time.timeScale = 0f;
+            }
+        }
     }
 
     public void BtnResumeClick()
     {
         pauseUI.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void BtnQuitClick()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
 }
