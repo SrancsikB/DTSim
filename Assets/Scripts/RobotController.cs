@@ -18,6 +18,7 @@ public class RobotController : MonoBehaviour
 
     public int wear = 0;
     public bool fail= false;
+    public bool eszlelveTores = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         RobotController robot =GetComponent<RobotController>();
@@ -85,6 +86,12 @@ public class RobotController : MonoBehaviour
                     if (spriteRenderer.color == Color.red)
                     {
                         Debug.Log("Hibás szín találva!");
+                        return;
+                    }
+                    if (pal.torott)
+                    {
+                        Debug.Log("Törött paletta találva!");
+                        eszlelveTores = true;
                         return;
                     }
                     

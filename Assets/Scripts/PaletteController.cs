@@ -7,6 +7,7 @@ public class PaletteController : MonoBehaviour
     int wayPointIndex = 0;
     [SerializeField] float movingSpeed=2.0f;
     [SerializeField] SimController simController;
+    [SerializeField] public bool torott;
 
     private enum State
     {
@@ -31,6 +32,7 @@ public class PaletteController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        torott = Random.Range(1, 101) < 10 ? true : false;
         transform.position = wayPoints[wayPointIndex].position;
         wayPointIndex += 1;
     }

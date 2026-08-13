@@ -1667,6 +1667,7 @@ MonoBehaviour:
   - {fileID: 1596762511}
   elagazasB:
   - {fileID: 849172154}
+  Szemetes: {fileID: 0}
 --- !u!4 &1243514729
 Transform:
   m_ObjectHideFlags: 0
@@ -2428,6 +2429,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3cb3f7429f69a440a1d7b00cf40306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wear: 0
+  fail: 0
+  eszlelveTores: 0
 --- !u!1 &1589467399
 GameObject:
   m_ObjectHideFlags: 0
