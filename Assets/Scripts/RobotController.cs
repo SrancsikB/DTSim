@@ -16,12 +16,15 @@ public class RobotController : MonoBehaviour
         
     }
 
-    
+    public int wear = 0;
+    public bool fail= false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         RobotController robot =GetComponent<RobotController>();
         PaletteController pal = collision.GetComponent<PaletteController>();
         SpriteRenderer spriteRenderer = collision.GetComponent<SpriteRenderer>();
+        SpriteRenderer robotsr=GetComponent<SpriteRenderer>();
+       
         if (robot.gameObject.name=="Robot")
         {
             
@@ -30,11 +33,37 @@ public class RobotController : MonoBehaviour
                 Debug.Log("Paletta elérve");
                 if (spriteRenderer != null)
                 {
-                    spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.red : Color.green;
-                    if (spriteRenderer.color==Color.green)
+                    if (Random.Range(70,101)<wear)
                     {
-                        spriteRenderer.color = Random.Range(1, 101) > 75 ? Color.white : Color.green; 
+                        fail = true;
+                        robotsr.color = Color.red;
+                        Color color = robotsr.color;
+                        color.a = 0.65f;
+                        robotsr.color = color;
+                        robotsr.sortingOrder = 3;
+                        return;
                     }
+                    if (spriteRenderer.color==Color.white && !fail)
+                    {
+                        int chance = Random.Range(1, 101);
+                        if (chance > 95)
+                        {
+                            return;
+                        }
+                        else if (chance>75)
+                        {
+                            spriteRenderer.color = Color.red;
+                            spriteRenderer.sortingOrder = 1;
+                            wear += 2;
+                            return;
+                        }
+
+                        spriteRenderer.color = Color.green;
+                        wear += 2;
+                    }
+
+                   
+
                     return;
 
                 }
@@ -69,10 +98,21 @@ public class RobotController : MonoBehaviour
             {
                 if (spriteRenderer != null)
                 {
-                    if (spriteRenderer.color != Color.green)
+                    if (Random.Range(70,101)<wear)
+                    {
+                        fail = true;
+                        robotsr.color = Color.red;
+                        Color color = robotsr.color;
+                        color.a = 0.65f;
+                        robotsr.color = color;
+                        robotsr.sortingOrder = 3;
+                        return;
+                    }
+                    if (spriteRenderer.color != Color.green && !fail)
                     {
                         spriteRenderer.color = Color.green;
                         Debug.Log("Hiba javítva!");
+                        wear += 10;
                         return;
                     }
                     
@@ -81,5 +121,21 @@ public class RobotController : MonoBehaviour
         }
 
 
+    }
+
+    private void OnMouseDown()
+    {
+        if (fail==true)
+        {
+            fail = false;
+            wear = 0;
+            SpriteRenderer robotsr = GetComponent<SpriteRenderer>();
+            robotsr.color = Color.grey;
+            Color color=robotsr.color;
+            color.a = 0.65f;
+            robotsr.color = color;
+            robotsr.sortingOrder = -1;
+            
+        }
     }
 }
