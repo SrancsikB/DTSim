@@ -11,6 +11,7 @@ public class SimController : MonoBehaviour
     [SerializeField] public Transform[] elagazasA;
     [SerializeField] public Transform[] elagazasB;
 
+    [SerializeField] public Transform Szemetes;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

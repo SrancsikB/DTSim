@@ -12,7 +12,8 @@ public class PaletteController : MonoBehaviour
     private enum State
     {
         MovingOnPath,
-        InBranch
+        InBranch,
+        ToTheTrashCan
     }
     private State currentState = State.MovingOnPath;
     private int branchIndex = 0;
@@ -50,6 +51,10 @@ public class PaletteController : MonoBehaviour
             case State.InBranch:
                 InBranch();
                 break;
+            case State.ToTheTrashCan:
+                ToTheTrashCan();
+                break;
+
         }
 
     }
@@ -107,6 +112,15 @@ public class PaletteController : MonoBehaviour
             }
         }
     }
+    private void ToTheTrashCan()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, simController.Szemetes.position, movingSpeed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, simController.Szemetes.position) < 0.05f)
+        {
+            transform.position = simController.Szemetes.position;
+            Invoke("DestroyPalette", 1.0f);
+        }
+    }
 
 
     private int SearchIndex(Transform[] elagazas, Transform target)
@@ -120,4 +134,17 @@ public class PaletteController : MonoBehaviour
         }
         return -1;
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        RobotController robot = collision.gameObject.GetComponent<RobotController>();
+        if (robot != null && robot.eszlelveTores)
+        {
+            currentState = State.ToTheTrashCan;
+        }
+    }
+    void DestroyPalette()
+    {
+        Destroy(gameObject);
+    }
+
 }
