@@ -2395,9 +2395,11 @@ MonoBehaviour:
   slots:
   - {fileID: 879001546}
   - {fileID: 1480012529}
+  - {fileID: 1837399125}
   items:
   - {fileID: 11400000, guid: 1240b7a1336a1f349a2a31eef16af43a, type: 2}
   - {fileID: 11400000, guid: 74f8060922c7cd547b3c28c981a03523, type: 2}
+  - {fileID: 11400000, guid: 2e7a1393fd35e434d9d7e74b6202a0ec, type: 2}
 --- !u!1 &1589467399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,7 +2831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 2731001722924673131, guid: 1f3d5f0e73bda444499e9bb541d3f28e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
