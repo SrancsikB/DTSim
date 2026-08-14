@@ -8,47 +8,57 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private ItemData item;
     private GameObject dragObject;
+    private RectTransform dragRectTransform;
+    private Canvas canvas;
+
+    private void Awake()
+    {
+        canvas = GetComponentInParent<Canvas>();
+    }
 
     public void SetItem(ItemData newItem)
     {
         item = newItem;
-        icon.sprite = item.icon;
-        icon.enabled = true;
+        if (item != null && item.icon != null)
+        {
+            icon.sprite = item.icon;
+            icon.enabled = true;
+        }
+        else
+        {
+            icon.enabled = false;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item == null)
-        {
-            return;
-        }
-            
+        if (item == null) return;
+
         dragObject = new GameObject("DraggingItem");
+        dragRectTransform = dragObject.AddComponent<RectTransform>();
+
+        dragObject.transform.SetParent(canvas.transform, false);
+        dragObject.transform.SetAsLastSibling();
 
         Image image = dragObject.AddComponent<Image>();
         image.sprite = item.icon;
         image.raycastTarget = false;
 
-        dragObject.transform.SetParent(transform.root);
-        dragObject.transform.SetAsLastSibling();
+        dragRectTransform.sizeDelta = new Vector2(50f, 50f);
 
         UpdateDragPosition(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dragObject == null)
-            return;
+        if (dragObject == null) return;
 
         UpdateDragPosition(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (dragObject == null)
-        {
-            return;
-        }
+        if (dragObject == null) return;
 
         Destroy(dragObject);
 
@@ -57,6 +67,19 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     private void UpdateDragPosition(PointerEventData eventData)
     {
-        dragObject.transform.position = eventData.position;
+        if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+        {
+            dragRectTransform.position = eventData.position;
+        }
+        else
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform,
+                eventData.position,
+                canvas.worldCamera,
+                out Vector2 localPoint
+            );
+            dragRectTransform.localPosition = localPoint;
+        }
     }
 }
