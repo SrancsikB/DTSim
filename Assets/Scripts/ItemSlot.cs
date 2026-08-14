@@ -19,8 +19,10 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (item == null)
+        {
             return;
-
+        }
+            
         dragObject = new GameObject("DraggingItem");
 
         Image image = dragObject.AddComponent<Image>();
@@ -44,7 +46,9 @@ public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         if (dragObject == null)
+        {
             return;
+        }
 
         Destroy(dragObject);
 

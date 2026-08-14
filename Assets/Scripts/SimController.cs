@@ -37,4 +37,29 @@ public class SimController : MonoBehaviour
 
     }
 
+    private void OnDrawGizmos()
+    {
+        if (wayPoints == null || wayPoints.Length < 2)
+        {
+            return;
+        }
+
+        Gizmos.color = Color.cyan;
+
+        for (int i = 0; i < wayPoints.Length; i++)
+        {
+            if (wayPoints[i] != null)
+            {
+                Gizmos.DrawWireSphere(wayPoints[i].position, 0.5f);
+
+                int nextIndex = (i + 1) % wayPoints.Length;
+
+                if (wayPoints[nextIndex] != null)
+                {
+                    Gizmos.DrawLine(wayPoints[i].position, wayPoints[nextIndex].position);
+                }
+            }
+        }
+    }
+
 }
