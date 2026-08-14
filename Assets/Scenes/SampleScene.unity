@@ -2089,7 +2089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 277340839067660442, guid: 348e29d7ba482244a8996f138490a312, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2290,8 +2290,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots:
   - {fileID: 879001546}
+  - {fileID: 1480012529}
   items:
   - {fileID: 11400000, guid: 1240b7a1336a1f349a2a31eef16af43a, type: 2}
+  - {fileID: 11400000, guid: 74f8060922c7cd547b3c28c981a03523, type: 2}
 --- !u!1 &1577840193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3288,6 +3290,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1600310580317698917, guid: 908d855640b81a64899279b3f74defb2, type: 3}
+      propertyPath: m_Size.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600310580317698917, guid: 908d855640b81a64899279b3f74defb2, type: 3}
+      propertyPath: m_Size.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600310580317698917, guid: 908d855640b81a64899279b3f74defb2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 277340839067660442, guid: 348e29d7ba482244a8996f138490a312, type: 3}
+    - target: {fileID: 1600310580317698917, guid: 908d855640b81a64899279b3f74defb2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2594661826472868696, guid: 908d855640b81a64899279b3f74defb2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

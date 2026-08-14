@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dabe120c7bf12f54ab9ede00f8bde8db
+guid: 1f3d5f0e73bda444499e9bb541d3f28e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2103773371746992815
-    second: Tester_0
+      213: 2731001722924673131
+    second: TrashCan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tester_0
+      name: TrashCan_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
-        height: 128
+        height: 114
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fa2c7ee3cba123d10800000000000000
-      internalID: 2103773371746992815
+      spriteID: b68a7e7f89776e520800000000000000
+      internalID: 2731001722924673131
       vertices: []
       indices: 
       edges: []
