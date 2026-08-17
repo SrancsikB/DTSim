@@ -4,6 +4,7 @@ using static UnityEditor.Progress;
 public class ToolbarToggle : MonoBehaviour
 {
     [SerializeField] private GameObject toolbar;
+    private bool isActive = false;
 
     void Start()
     {
@@ -17,12 +18,16 @@ public class ToolbarToggle : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.C) && !toolbar.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isActive = !isActive;
+        }
+
+        if (isActive) 
         {
             toolbar.SetActive(true);
         }
-
-        if (Input.GetKeyDown(KeyCode.V) && toolbar.activeSelf)
+        else 
         {
             toolbar.SetActive(false);
         }
