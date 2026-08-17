@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour
@@ -18,7 +19,6 @@ public class RobotController : MonoBehaviour
 
     public int wear = 0;
     public bool fail= false;
-    public bool eszlelveTores = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         RobotController robot =GetComponent<RobotController>();
@@ -88,10 +88,11 @@ public class RobotController : MonoBehaviour
                         Debug.Log("Hibás szín találva!");
                         return;
                     }
-                    if (pal.torott)
+                    if (pal.torott==true)
                     {
                         Debug.Log("Törött paletta találva!");
-                        eszlelveTores = true;
+                        
+                        pal.currentState = PaletteController.State.ToTheTrashCan;
                         return;
                     }
                     

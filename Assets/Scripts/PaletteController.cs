@@ -9,13 +9,13 @@ public class PaletteController : MonoBehaviour
     [SerializeField] SimController simController;
     [SerializeField] public bool torott;
 
-    private enum State
+    public enum State
     {
         MovingOnPath,
         InBranch,
         ToTheTrashCan
     }
-    private State currentState = State.MovingOnPath;
+    public State currentState = State.MovingOnPath;
     private int branchIndex = 0;
     private Transform[] activeBranch;
     
@@ -114,12 +114,16 @@ public class PaletteController : MonoBehaviour
     }
     private void ToTheTrashCan()
     {
-        transform.position = Vector3.MoveTowards(transform.position, simController.Szemetes.position, movingSpeed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, simController.Szemetes.position) < 0.05f)
+        if (torott) 
         {
-            transform.position = simController.Szemetes.position;
-            Invoke("DestroyPalette", 1.0f);
+            transform.position = Vector3.MoveTowards(transform.position, simController.Szemetes.position, movingSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, simController.Szemetes.position) < 0.05f)
+            {
+                transform.position = simController.Szemetes.position;
+                Invoke("DestroyPalette", 1.0f);
+            }
         }
+       
     }
 
 
@@ -134,14 +138,7 @@ public class PaletteController : MonoBehaviour
         }
         return -1;
     }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        RobotController robot = collision.gameObject.GetComponent<RobotController>();
-        if (robot != null && robot.eszlelveTores)
-        {
-            currentState = State.ToTheTrashCan;
-        }
-    }
+    
     void DestroyPalette()
     {
         Destroy(gameObject);
