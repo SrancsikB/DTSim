@@ -14,7 +14,7 @@ public class PlacementManager : MonoBehaviour
     public void PlaceItem(ItemData itemData, Vector3 screenPosition)
     {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
-        worldPos.z = -1f;
+        worldPos.z = 0f;
 
         Instantiate(itemData.prefab, worldPos, Quaternion.identity);
     }
