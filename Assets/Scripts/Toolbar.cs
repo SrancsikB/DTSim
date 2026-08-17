@@ -2,19 +2,26 @@ using UnityEngine;
 
 public class Toolbar : MonoBehaviour
 {
-    [SerializeField] private ItemSlot[] slots;
-    [SerializeField] private ItemData[] items;
-    
+    public GameObject slotPrefab;
+    public Transform toolbarPanel;
+    public ItemData[] availableItems;
+
     private void Start()
     {
-        for (int i = 0; i < slots.Length && i < items.Length; i++)
-        {
-            slots[i].SetItem(items[i]);
-        }
+        PopulateToolbar();
     }
 
-    private void Update()
+    void PopulateToolbar()
     {
-        
+        foreach (var itemData in availableItems)
+        {
+            GameObject slot = Instantiate(slotPrefab, toolbarPanel);
+            ItemSlot draggable = slot.GetComponent<ItemSlot>();
+            
+            if (draggable != null)
+            {
+                draggable.Setup(itemData);
+            }
+        }
     }
 }

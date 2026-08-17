@@ -5,25 +5,17 @@ public class PlacementManager : MonoBehaviour
 {
     public static PlacementManager Instance;
 
-    [SerializeField] private Camera mainCamera;
-
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    public void TryPlaceItem(ItemData item, Vector2 screenPosition)
+    public void PlaceItem(ItemData itemData, Vector3 screenPosition)
     {
-        Vector3 worldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(
-                screenPosition.x,
-                screenPosition.y,
-                -mainCamera.transform.position.z
-            )
-        );
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPosition);
+        worldPos.z = -1f;
 
-        worldPosition.z = 0f;
-
-        Instantiate(item.prefab, worldPosition, Quaternion.identity);
+        Instantiate(itemData.prefab, worldPos, Quaternion.identity);
     }
 }

@@ -4,82 +4,52 @@ using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private Image icon;
-
-    private ItemData item;
-    private GameObject dragObject;
-    private RectTransform dragRectTransform;
-    private Canvas canvas;
+    public ItemData itemData;
+    private GameObject draggingIcon;
+    private Canvas rootCanvas;
 
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>();
+        rootCanvas = GetComponentInParent<Canvas>();
     }
 
-    public void SetItem(ItemData newItem)
+    public void Setup(ItemData data)
     {
-        item = newItem;
-        if (item != null && item.icon != null)
-        {
-            icon.sprite = item.icon;
-            icon.enabled = true;
-        }
-        else
-        {
-            icon.enabled = false;
-        }
+        itemData = data;
+        GetComponent<Image>().sprite = data.icon;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (item == null) return;
+        draggingIcon = new GameObject("DraggingIcon");
+        draggingIcon.transform.SetParent(rootCanvas.transform, false);
+        draggingIcon.transform.SetAsLastSibling();
 
-        dragObject = new GameObject("DraggingItem");
-        dragRectTransform = dragObject.AddComponent<RectTransform>();
-
-        dragObject.transform.SetParent(canvas.transform, false);
-        dragObject.transform.SetAsLastSibling();
-
-        Image image = dragObject.AddComponent<Image>();
-        image.sprite = item.icon;
-        image.raycastTarget = false;
-
-        dragRectTransform.sizeDelta = new Vector2(50f, 50f);
-
-        UpdateDragPosition(eventData);
+        Image img = draggingIcon.AddComponent<Image>();
+        img.sprite = itemData.icon;
+        img.raycastTarget = false; 
+        RectTransform rt = draggingIcon.GetComponent<RectTransform>();
+        rt.sizeDelta = GetComponent<RectTransform>().sizeDelta;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dragObject == null) return;
-
-        UpdateDragPosition(eventData);
+        if (draggingIcon != null)
+        {
+            draggingIcon.transform.position = Input.mousePosition;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (dragObject == null) return;
-
-        Destroy(dragObject);
-
-        PlacementManager.Instance.TryPlaceItem(item, eventData.position);
-    }
-
-    private void UpdateDragPosition(PointerEventData eventData)
-    {
-        if (canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+        if (draggingIcon != null)
         {
-            dragRectTransform.position = eventData.position;
+            Destroy(draggingIcon);
         }
-        else
+
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.transform as RectTransform,
-                eventData.position,
-                canvas.worldCamera,
-                out Vector2 localPoint
-            );
-            dragRectTransform.localPosition = localPoint;
+            PlacementManager.Instance.PlaceItem(itemData, Input.mousePosition);
         }
     }
 }
