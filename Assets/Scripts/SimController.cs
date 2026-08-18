@@ -3,23 +3,14 @@ using UnityEngine;
 public class SimController : MonoBehaviour
 {
     [SerializeField] PaletteController paletteController;
-    [SerializeField] List<Transform> wayPoints;
+    [SerializeField] Transform[] wayPoints;
     [SerializeField] float palGenerateTime = 4.0f;
     float timeToGeneratePal;
     [SerializeField] public Transform elagazasEleje;
     [SerializeField] public Transform elagazasVege;
     [SerializeField] public Transform[] elagazasA;
     [SerializeField] public Transform[] elagazasB;
-
     [SerializeField] public Transform Szemetes;
-
-    public void AddWaypont(Transform wayPoint) 
-    {
-        if (!wayPoints.Contains(wayPoint)) 
-        {
-            wayPoints.Add
-        }
-    }
     
     private void Start()
     {
