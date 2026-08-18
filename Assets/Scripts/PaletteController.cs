@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PaletteController : MonoBehaviour
 {
-
+    public bool torott;
     public Transform[] wayPoints;
-    int wayPointIndex = 0;
-    [SerializeField] float movingSpeed=2.0f;
-    [SerializeField] SimController simController;
-    [SerializeField] public bool torott;
+    public State currentState = State.MovingOnPath;
+
+    [SerializeField]private float movingSpeed=2.0f;
+    [SerializeField]private SimController simController;
+    private int branchIndex = 0;
+    private Transform[] activeBranch;
+    private int wayPointIndex = 0;
 
     public enum State
     {
@@ -15,31 +18,25 @@ public class PaletteController : MonoBehaviour
         InBranch,
         ToTheTrashCan
     }
-    public State currentState = State.MovingOnPath;
-    private int branchIndex = 0;
-    private Transform[] activeBranch;
     
-
-    void Awake()
+    private void Awake()
     {
         simController = Object.FindFirstObjectByType<SimController>();
 
         if (simController == null)
+        {
             Debug.LogError("Nincs SimController a jelenetben!");
-
-
-
+        }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Start()
     {
         torott = Random.Range(1, 101) < 10 ? true : false;
         transform.position = wayPoints[wayPointIndex].position;
         wayPointIndex += 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -54,10 +51,9 @@ public class PaletteController : MonoBehaviour
             case State.ToTheTrashCan:
                 ToTheTrashCan();
                 break;
-
         }
-
     }
+
     private void MovingOnPath(SpriteRenderer spriteRenderer)
     {
         if (wayPointIndex < wayPoints.Length)
@@ -83,10 +79,10 @@ public class PaletteController : MonoBehaviour
                         wayPointIndex = 0;
                     }
                 }
-
             }
         }
     }
+
     private void InBranch()
     {
 
@@ -112,6 +108,7 @@ public class PaletteController : MonoBehaviour
             }
         }
     }
+
     private void ToTheTrashCan()
     {
         if (torott) 
@@ -126,7 +123,6 @@ public class PaletteController : MonoBehaviour
        
     }
 
-
     private int SearchIndex(Transform[] elagazas, Transform target)
     {
         for (int i = 0; i < elagazas.Length; i++)
@@ -139,9 +135,8 @@ public class PaletteController : MonoBehaviour
         return -1;
     }
     
-    void DestroyPalette()
+    private void DestroyPalette()
     {
         Destroy(gameObject);
     }
-
 }

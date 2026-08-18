@@ -13,7 +13,7 @@ public class ToolbarToggle : MonoBehaviour
 
     void Update()
     {
-        if (toolbar is null)
+        if (toolbar == null)
         {
             return;
         }
@@ -23,13 +23,6 @@ public class ToolbarToggle : MonoBehaviour
             isActive = !isActive;
         }
 
-        if (isActive) 
-        {
-            toolbar.SetActive(true);
-        }
-        else 
-        {
-            toolbar.SetActive(false);
-        }
+        toolbar.SetActive(isActive);
     }
 }

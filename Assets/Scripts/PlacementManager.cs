@@ -7,8 +7,14 @@ public class PlacementManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null) 
+        { 
+            Instance = this;
+        }
+        else 
+        { 
+            Destroy(gameObject);
+        }
     }
 
     public void PlaceItem(ItemData itemData, Vector3 screenPosition)

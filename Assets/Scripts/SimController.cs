@@ -3,7 +3,7 @@ using UnityEngine;
 public class SimController : MonoBehaviour
 {
     [SerializeField] PaletteController paletteController;
-    [SerializeField] Transform[] wayPoints;
+    [SerializeField] List<Transform> wayPoints;
     [SerializeField] float palGenerateTime = 4.0f;
     float timeToGeneratePal;
     [SerializeField] public Transform elagazasEleje;
@@ -12,16 +12,24 @@ public class SimController : MonoBehaviour
     [SerializeField] public Transform[] elagazasB;
 
     [SerializeField] public Transform Szemetes;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public void AddWaypont(Transform wayPoint) 
+    {
+        if (!wayPoints.Contains(wayPoint)) 
+        {
+            wayPoints.Add
+        }
+    }
+    
+    private void Start()
     {
         GeneratePal();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timeToGeneratePal -= Time.deltaTime;
+
         if (timeToGeneratePal < 0)
         {
             GeneratePal();
@@ -29,7 +37,7 @@ public class SimController : MonoBehaviour
 
     }
 
-    void GeneratePal()
+    private void GeneratePal()
     {
         timeToGeneratePal = palGenerateTime;
         GameObject newPal= Instantiate(paletteController.gameObject);

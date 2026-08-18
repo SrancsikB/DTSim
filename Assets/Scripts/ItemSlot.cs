@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public ItemData itemData;
+    
     private GameObject draggingIcon;
     private Canvas rootCanvas;
 
